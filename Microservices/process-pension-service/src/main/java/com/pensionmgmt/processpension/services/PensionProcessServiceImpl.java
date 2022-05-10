@@ -25,8 +25,8 @@ public class PensionProcessServiceImpl implements PensionProcessServices {
 		PensionerDetail pensionerDetail = transactionRequest.getPensionerDetail();
 		pensionerDetail.setAadharNumber(processPensionInput.getAdharNumber());
 		
-		template.postForObject("http://PAYMENT-SERVICE/payment/doPayment", payment,
-//				Payment.class);
+		template.postForObject("http://PENSION-SERVICE/api/v1/ProcessPension/PensionDetail", payment,
+				Payment.class);
 		
 		if(transactionRequest.getAadharNumber() == pensionerDetail.getAadharNumber())
 		{

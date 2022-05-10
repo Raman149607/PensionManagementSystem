@@ -12,7 +12,7 @@ import com.pensionmgmt.processpension.entity.PensionDetail;
 import com.pensionmgmt.processpension.services.PensionProcessServiceImpl;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/ProcessPension")
 public class ProcessPensionController {
 	
 	@Autowired

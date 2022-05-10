@@ -11,10 +11,10 @@ spring:
           uri: lb://PENSIONER-SERVICE
           predicates:
             - Path=/api/v1/Pensioner/**
-#        - id: payment-service
-#          uri: lb://PAYMENT-SERVICE
-#          predicates:
-#            - Path=/payment/**
+        - id: process-pension-service
+          uri: lb://PENSION-SERVICE
+          predicates:
+            - Path=/api/v1/ProcessPension/**
     
 eureka:
   client:
