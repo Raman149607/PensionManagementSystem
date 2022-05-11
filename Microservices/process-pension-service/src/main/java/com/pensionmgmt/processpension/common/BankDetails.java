@@ -3,14 +3,7 @@ package com.pensionmgmt.processpension.common;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-
-@NoArgsConstructor
-@AllArgsConstructor
 public class BankDetails {
-
 
 	private String accountNumber;
 	private String bankName;

@@ -1,32 +1,51 @@
 package com.pensionmgmt.processpension.common;
 
+import java.util.Date;
 
-import com.pensionmgmt.processpension.entity.ProcessPensionInput;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class TransactionRequest {
 
-	private PensionerDetail pensionerDetail;
-	private ProcessPensionInput input;
-
-	public PensionerDetail getPensionerDetail() {
-		return pensionerDetail;
+	private long aadharNumber;
+	private String name;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
+	@Temporal(TemporalType.DATE)
+	private Date dateOfBirth;
+	private String pan;
+	private String pensionType;
+	public long getAadharNumber() {
+		return aadharNumber;
 	}
-
-	public void setPensionerDetail(PensionerDetail pensionerDetail) {
-		this.pensionerDetail = pensionerDetail;
+	public void setAadharNumber(long aadharNumber) {
+		this.aadharNumber = aadharNumber;
 	}
-
-	public ProcessPensionInput getInput() {
-		return input;
+	public String getName() {
+		return name;
 	}
-
-	public void setInput(ProcessPensionInput input) {
-		this.input = input;
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+	public String getPan() {
+		return pan;
+	}
+	public void setPan(String pan) {
+		this.pan = pan;
+	}
+	public String getPensionType() {
+		return pensionType;
+	}
+	public void setPensionType(String pensionType) {
+		this.pensionType = pensionType;
 	}
 
 }

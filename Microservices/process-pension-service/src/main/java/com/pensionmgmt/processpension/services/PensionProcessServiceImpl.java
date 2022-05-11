@@ -7,9 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.pensionmgmt.processpension.common.PensionerDetail;
 import com.pensionmgmt.processpension.common.TransactionRequest;
-import com.pensionmgmt.processpension.common.TransactionResponse;
 import com.pensionmgmt.processpension.entity.PensionDetail;
-import com.pensionmgmt.processpension.entity.ProcessPensionInput;
 
 @Service
 public class PensionProcessServiceImpl implements PensionProcessServices {
@@ -21,18 +19,14 @@ public class PensionProcessServiceImpl implements PensionProcessServices {
 
 	public PensionDetail CalculatePension(TransactionRequest transactionRequest) throws Exception {
 		
-		ProcessPensionInput processPensionInput =transactionRequest.getInput();
-		PensionerDetail pensionerDetail = transactionRequest.getPensionerDetail();
-		pensionerDetail.setAadharNumber(processPensionInput.getAdharNumber());
 		
-		template.postForObject("http://PENSION-SERVICE/api/v1/ProcessPension/PensionDetail", payment,
-				Payment.class);
+		PensionerDetail pensionerDetail2 = this.template.getForObject("http://PENSIONER-SERVICE/api/v1/Pensioner/PensionerDetailByAdhaar/{adharNumber}",PensionerDetail.class);
 		
-		if(transactionRequest.getAadharNumber() == pensionerDetail.getAadharNumber())
+		if(transactionRequest.getAadharNumber()== pensionerDetail2.getAadharNumber())
 		{
 			
-			double salary = pensionerDetail.getSalaryEarned();
-			double allowances = pensionerDetail.getAllowances();
+			double salary = pensionerDetail2.getSalaryEarned();
+			double allowances = pensionerDetail2.getAllowances();
 			double pensionAmount = 0;
 			if(transactionRequest.getPensionType().equals("SELF"))
 			{
@@ -43,23 +37,21 @@ public class PensionProcessServiceImpl implements PensionProcessServices {
 				pensionAmount = 0.5 * salary + allowances;
 			}
 			
+			
+			double serviceCharge = 500;
 			PensionDetail pensionDetail = new PensionDetail();
 			
 			pensionDetail.setPensionAmount(pensionAmount);
-			pensionDetail.getBankServiceCharge();
+			
+			pensionDetail.setBankServiceCharge(serviceCharge);
 			
 			return pensionDetail;
+					
 		}
 		else
 		{
 			throw new IllegalArgumentException("Invalid pensioner detail provided, please provide valid detail.");
 		}
-
-
-
-
-
-
 
 
 

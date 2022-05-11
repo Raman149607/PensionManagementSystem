@@ -10,14 +10,8 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
-
-@AllArgsConstructor
-@NoArgsConstructor
 public class PensionerDetail {
-	
 
 	private long aadharNumber;
 	private String name;
@@ -29,7 +23,7 @@ public class PensionerDetail {
 	private double allowances;
 	@Enumerated(EnumType.STRING)
 	private PensionType pensionType;
-	
+
 	private List<BankDetails> bankDetails;
 
 	public long getAadharNumber() {
@@ -95,6 +89,5 @@ public class PensionerDetail {
 	public void setBankDetails(List<BankDetails> bankDetails) {
 		this.bankDetails = bankDetails;
 	}
-	
 
 }
